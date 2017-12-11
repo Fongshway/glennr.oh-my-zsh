@@ -11,15 +11,20 @@
 
 - name: Install zsh in Arch Linux derivatives
   pacman: name=zsh state=present
+  become: true
   when: ansible_os_family == 'Arch Linux'
 
 - name: Install oh-my-zsh
   git: repo=https://github.com/robbyrussell/oh-my-zsh dest=~/.oh-my-zsh
+  become: true
+  become_user: "{{ oh_my_zsh_user }}"
 
 - name: Copy .zshrc to $HOME
   template:
     src: zshrc.j2
     dest: ~/.zshrc
+  become: true
+  become_user: "{{ oh_my_zsh_user }}"
 
 - name: switch to ZSH
   user: name={{ oh_my_zsh_user }} shell=/usr/bin/zsh
