@@ -22,7 +22,7 @@
     dest: ~/.zshrc
 
 - name: switch to ZSH
-  user: name={{ ansible_env.USER }} shell=/usr/bin/zsh
+  user: name={{ oh_my_zsh_user }} shell=/usr/bin/zsh
   become: true
   when: ansible_os_family != 'Darwin'
 
